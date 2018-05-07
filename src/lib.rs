@@ -2,7 +2,10 @@
 #![no_std] 
 
 #[no_mangle]
-pub extern fn rust_main() {}
+pub extern fn rust_main() {
+    let x = ["Hello", "World", "!"];
+    let y = x;
+}
 
 #[lang = "eh_personality"] #[no_mangle] pub extern fn eh_personal() {}
 #[lang = "panic_fmt"] #[no_mangle] pub extern fn panic_fmt() -> ! {loop{}}
