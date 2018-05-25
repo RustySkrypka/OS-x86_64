@@ -8,15 +8,13 @@
 #[macro_use]
 mod vga_buffer;
 
+extern crate multiboot2;
 extern crate rlibc;
 extern crate volatile;
 extern crate spin;
 
 #[no_mangle]
-pub extern fn rust_main() {
-//    use core::fmt::Write;
-//    vga_buffer::WRITER.lock().write_str("Hello again");
-//    write!(vga_buffer::WRITER.lock(), ", some numbers: {} {}", 42, 1.337);
+pub extern fn rust_main(multiboot_information_address: usize) {
 
     vga_buffer::clear_screen();
 
