@@ -120,19 +120,6 @@ impl fmt::Write for Writer {
     }
 }
 
-pub fn print_something() {
-    use core::fmt::Write;
-    let mut writer = Writer {
-        column_position: 0,
-        color_code: ColorCode::new(Color::LightGreen, Color::Black),
-        buffer: unsafe { Unique::new_unchecked(0xb8000 as *mut _) },
-    };
-
-    writer.write_byte(b'H');
-    writer.write_str("ello! ");
-    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0);
-}
-
 use spin::Mutex;
 
 pub static WRITER: Mutex<Writer> = Mutex::new(Writer {
