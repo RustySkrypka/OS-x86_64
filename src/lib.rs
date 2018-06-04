@@ -9,6 +9,8 @@
 mod vga_buffer;
 mod memory;
 
+#[macro_use]
+extern crate bitflags;
 extern crate multiboot2;
 extern crate rlibc;
 extern crate volatile;
