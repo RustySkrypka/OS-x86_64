@@ -2,8 +2,8 @@ use memory::Frame;
 
 pub struct Entry(u64);
 
-impt Entry {
-    pub fn is_unused(&self) -> boot {
+impl Entry {
+    pub fn is_unused(&self) -> bool {
         self.0 == 0
     }
 
@@ -27,7 +27,7 @@ impt Entry {
 
     pub fn set(&mut self, frame: Frame, flags: EntryFlags) {
         assert!(frame.start_address() & !0x000fffff_fffff000 == 0);
-        self.0 - (frame.start_address() as u64) | flags.bits();
+        self.0 = (frame.start_address() as u64) | flags.bits();
     }
 }
 
