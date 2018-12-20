@@ -1,5 +1,3 @@
-#![feature(const_unique_new)]
-#![feature(unique)]
 #![feature(lang_items)]
 #![no_std] 
 #![feature(const_fn)]
@@ -15,6 +13,8 @@ extern crate multiboot2;
 extern crate rlibc;
 extern crate volatile;
 extern crate spin;
+
+use core::panic::PanicInfo;
 
 #[no_mangle]
 pub extern fn rust_main(multiboot_information_address: usize) {
@@ -65,12 +65,10 @@ pub extern fn rust_main(multiboot_information_address: usize) {
 
 #[lang = "eh_personality"] #[no_mangle] pub extern fn eh_personal() {}
 
-#[lang = "panic_fmt"]
+#[panic_handler]
 #[no_mangle]
-pub extern fn panic_fmt(fmt: core::fmt::Arguments, file: &'static str,
-    line: u32) -> ! 
+pub extern fn panic_fmt(pi: &PanicInfo) -> ! 
 {
-    println!("\n\nPANIC in {} at line {}:", file, line);
-    println!("  {}", fmt);
+    println!("\n\n{}", pi);
     loop{}
 }
